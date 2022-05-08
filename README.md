@@ -3,7 +3,7 @@
 
 From within the **Impact** folder:
 ### To compile the main files with tester.java:
-        javac -d bin -cp src/test/tester.java src/numberrangesummarizer/*.java
+        javac -d bin src/test/tester.java src/numberrangesummarizer/*.java
 
 ### To use tester.java:
         java -cp bin tester data/numbers.txt
