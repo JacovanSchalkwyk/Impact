@@ -6,6 +6,9 @@ import java.util.Collection;
 
 import numberrangesummarizer.GroupIntoRange;
 
+/* A tester where you can use the data/numbers.txt file
+ * to import a list of numbers.
+*/
 public class tester {
     public static void main(String[] args){
         String input_numbers = null;

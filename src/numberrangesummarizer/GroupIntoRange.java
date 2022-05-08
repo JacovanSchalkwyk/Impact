@@ -1,9 +1,11 @@
 package numberrangesummarizer;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/** Implements NumberRangeSummarizer to collect and summarize/group
+ *  together sequential numbers.
+*/
 public class GroupIntoRange implements NumberRangeSummarizer {
     private LinkedList<Integer> numbers;
 
@@ -12,10 +14,15 @@ public class GroupIntoRange implements NumberRangeSummarizer {
     }
 
     public Collection<Integer> collect(String input) { 
+        // If input is null return
+        if (input == null) {
+            return null;
+        }
         String[] split_string = input.split(",");
-
+        // If an empty string is passed in, return previously saved numbers 
         if (input.isEmpty()) return numbers;
 
+        // Loops over input and adds the numbers to 'numbers'
         for (int i = 0; i < split_string.length; i++) {
             try{
                 orderedAdd(Integer.parseInt(split_string[i]));
@@ -23,14 +30,24 @@ public class GroupIntoRange implements NumberRangeSummarizer {
                 System.out.printf("'%s' is not a number\n", split_string[i]);
             }
         }
-
         return numbers;
     }
 
+    /**
+     * Summarizes sequential numbers
+     * @param input Collection<Integer> to summarize
+     * @return String of summarized numbers
+     */
     public String summarizeCollection(Collection<Integer> input) {
+        // The string holding the return value
         String grouped;
 
+        // If input is null return
+        if (input == null) {
+            return null;
+        }
 
+        // Returns empty string if input is empty
         if (input.isEmpty()) return "";
 
         Iterator itr = input.iterator();
@@ -40,6 +57,7 @@ public class GroupIntoRange implements NumberRangeSummarizer {
         
         int x = start;
         int previous = x;
+        // Adds numbers sequentially
         while (itr.hasNext()) {
             previous = x;
             x = (int) itr.next();
@@ -62,6 +80,7 @@ public class GroupIntoRange implements NumberRangeSummarizer {
             }
         }
 
+        // Adds the final number
         if (start == x) {
             if (!grouped.isEmpty()) {
                 grouped += ", ";
@@ -77,6 +96,10 @@ public class GroupIntoRange implements NumberRangeSummarizer {
         return grouped;
     }
 
+    /**
+     * Takes in an Integer x and adds them sorted to 'numbers'
+     * @param x the Integer to add
+     */
     private void orderedAdd(Integer x) {
         Iterator itr = numbers.iterator();
 
@@ -94,7 +117,7 @@ public class GroupIntoRange implements NumberRangeSummarizer {
             numbers.add(i, x);
         }
     }
-
+    
     @Override
     public String toString() {
         return numbers.toString();
